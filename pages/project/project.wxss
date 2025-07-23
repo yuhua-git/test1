@@ -1,0 +1,298 @@
+/* 容器样式 */
+.project-container {
+  min-height: 100vh;
+  background: transparent;
+  padding: 20rpx;
+}
+
+/* 搜索框样式 */
+.search-box {
+  display: flex;
+  padding: 16rpx;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.2);
+  gap: 16rpx;
+}
+
+.search-input {
+  width: 70%;
+  height: 64rpx;
+  padding: 0 24rpx;
+  font-size: 26rpx;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 32rpx;
+  color: rgba(33, 33, 33, 0.9);
+}
+
+.search-btn {
+  width: 30%;
+  height: 64rpx;
+  line-height: 64rpx;
+  background: rgba(0, 123, 255, 0.3);
+  color: rgba(33, 33, 33, 0.9);
+  font-size: 26rpx;
+  border-radius: 32rpx;
+  text-align: center;
+  padding: 0;
+  border: 1px solid rgba(0, 123, 255, 0.5);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.search-btn:active {
+  transform: scale(0.95);
+  background: rgba(0, 123, 255, 0.4);
+}
+
+/* 登录部分样式 */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 30rpx;
+}
+
+.login-image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 40rpx;
+  filter: brightness(0.9);
+}
+
+.login-tip {
+  font-size: 32rpx;
+  color: rgba(33, 33, 33, 0.7);
+  margin-bottom: 40rpx;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.login-btn {
+  width: 300rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: rgba(0, 123, 255, 0.3);
+  color: rgba(33, 33, 33, 0.9);
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  border: 1px solid rgba(0, 123, 255, 0.5);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.login-btn:active {
+  transform: scale(0.95);
+  background: rgba(0, 123, 255, 0.4);
+}
+
+/* 项目列表样式 */
+.project-list {
+  margin-bottom: 20rpx;
+}
+
+.project-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.2);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.project-item:active {
+  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.project-name {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: rgba(33, 33, 33, 0.9);
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.project-status {
+  font-size: 24rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  backdrop-filter: blur(5px);
+}
+
+.project-status.pending {
+  background: rgba(255, 165, 0, 0.2);
+  color: #ffd700;
+  border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+.project-status.in-progress {
+  background: rgba(24, 144, 255, 0.2);
+  color: #00f0ff;
+  border: 1px solid rgba(24, 144, 255, 0.3);
+}
+
+.project-status.completed {
+  background: rgba(82, 196, 26, 0.2);
+  color: #00ff9d;
+  border: 1px solid rgba(82, 196, 26, 0.3);
+}
+
+.project-status.delayed {
+  background: rgba(255, 77, 79, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 77, 79, 0.3);
+}
+
+.project-info {
+  margin-bottom: 20rpx;
+}
+
+.info-item {
+  display: flex;
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
+
+.info-item .label {
+  color: rgba(33, 33, 33, 0.6);
+  width: 160rpx;
+}
+
+.info-item .value {
+  color: rgba(33, 33, 33, 0.8);
+  flex: 1;
+}
+
+.progress-bar {
+  height: 16rpx;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+
+.progress-inner {
+  height: 100%;
+  background: linear-gradient(90deg, #00f0ff, #0066ff);
+  border-radius: 8rpx;
+  transition: width 0.3s ease;
+}
+
+.project-footer {
+  margin-top: 30rpx;
+}
+
+/* 流程状态样式 */
+.status-flow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 40rpx;
+  position: relative;
+}
+
+.flow-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  min-width: 120rpx;
+}
+
+.flow-dot {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  margin-bottom: 16rpx;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.flow-item.current .flow-dot {
+  width: 32rpx;
+  height: 32rpx;
+  background: #00f0ff;
+  box-shadow: 0 0 20rpx rgba(0, 240, 255, 0.5);
+}
+
+.flow-item.current .flow-text {
+  color: #00f0ff;
+  font-size: 28rpx;
+  font-weight: 500;
+  text-shadow: 0 0 10rpx rgba(0, 240, 255, 0.5);
+}
+
+.flow-line {
+  position: absolute;
+  top: 12rpx;
+  left: 50%;
+  width: 100%;
+  height: 2rpx;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 0;
+}
+
+.flow-text {
+  font-size: 24rpx;
+  color: rgba(33, 33, 33, 0.7);
+  text-align: center;
+  width: 100%;
+  margin-top: 8rpx;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.flow-item.completed .flow-dot {
+  background: #00f0ff;
+}
+
+.flow-item.completed .flow-line {
+  background: linear-gradient(90deg, #00f0ff, #0066ff);
+}
+
+.flow-item.completed .flow-text {
+  color: rgba(33, 33, 33, 0.8);
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.flow-item.current .flow-dot {
+  width: 32rpx;
+  height: 32rpx;
+  border: 4rpx solid #1296db;
+  background-color: #fff;
+  margin-top: -4rpx;
+}
+
+.flow-item.current .flow-text {
+  color: #1296db;
+  font-weight: 500;
+}
+
+/* 加载和空状态样式 */
+.loading,
+.empty {
+  text-align: center;
+  padding: 100rpx 30rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.empty-image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 20rpx;
+}

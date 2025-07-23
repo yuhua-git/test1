@@ -1,0 +1,37 @@
+<view class="news-container">
+  <view class="news-list">
+    <view 
+      class="news-item" 
+      wx:for="{{newsList}}" 
+      wx:key="id"
+      bindtap="goToDetail"
+      data-id="{{item.id}}"
+    >
+      <image 
+        class="news-image" 
+        src="{{item.coverImage}}" 
+        mode="aspectFill"
+      />
+      <view class="news-content">
+        <text class="news-title">{{item.title}}</text>
+        <text class="news-desc">{{item.description}}</text>
+        <view class="news-info">
+          <text class="news-time">{{item.publishTime}}</text>
+          <text class="news-source">{{item.source}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <view class="no-more" wx:if="{{!hasMore && newsList.length > 0}}">
+    <text>没有更多内容了</text>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && newsList.length === 0}}">
+    <text>暂无资讯</text>
+  </view>
+</view>

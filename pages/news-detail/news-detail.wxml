@@ -1,0 +1,39 @@
+<view class="detail-container">
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <view class="detail-content" wx:else>
+    <view class="article-header">
+      <text class="article-title">{{newsDetail.title}}</text>
+      <view class="article-info">
+        <text class="article-source">{{newsDetail.source}}</text>
+        <text class="article-time">{{newsDetail.publishTime}}</text>
+      </view>
+    </view>
+
+    <view class="article-cover" wx:if="{{newsDetail.coverImage}}">
+      <image 
+        src="{{newsDetail.coverImage}}" 
+        mode="widthFix"
+        class="cover-image"
+      />
+    </view>
+
+    <view class="article-content">
+      <rich-text nodes="{{newsDetail.content}}"></rich-text>
+    </view>
+
+    <view class="article-footer">
+      <view class="footer-info">
+        <text class="views">阅读 {{newsDetail.views}}</text>
+        <text class="likes">点赞 {{newsDetail.likes}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="error" wx:if="{{!loading && !newsDetail}}">
+    <text>内容加载失败</text>
+    <button class="retry-btn" bindtap="loadNewsDetail">重试</button>
+  </view>
+</view>

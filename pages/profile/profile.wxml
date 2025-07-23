@@ -1,0 +1,52 @@
+<view class="profile-container">
+  <!-- 用户信息区域 -->
+  <view class="user-section">
+    <view class="user-info" wx:if="{{isLogin}}">
+      <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"/>
+      <view class="info-right">
+        <text class="nickname">{{userInfo.nickName}}</text>
+        <text class="welcome">欢迎使用行业资讯小程序</text>
+      </view>
+    </view>
+
+    <view class="login-section" wx:else>
+      <image class="default-avatar" src="/images/profile.png" mode="aspectFill"/>
+      <button 
+        class="login-btn" 
+        type="primary"
+        bindtap="handleLogin"
+      >微信一键登录</button>
+    </view>
+  </view>
+
+  <!-- 菜单列表 -->
+  <view class="menu-list">
+    <view 
+      class="menu-item"
+      wx:for="{{menuList}}"
+      wx:key="text"
+      bindtap="handleMenuClick"
+      data-url="{{item.url}}"
+      data-type="{{item.type}}"
+    >
+      <view class="menu-content">
+        <image class="menu-icon" src="/images/{{item.icon}}.svg"/>
+        <text class="menu-text">{{item.text}}</text>
+      </view>
+      <image class="arrow-icon" src="/images/arrow-right.svg"/>
+    </view>
+  </view>
+
+  <!-- 退出登录按钮 -->
+  <view class="logout-section" wx:if="{{isLogin}}">
+    <button 
+      class="logout-btn"
+      bindtap="handleLogout"
+    >退出登录</button>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text>当前版本 1.0.0</text>
+  </view>
+</view>

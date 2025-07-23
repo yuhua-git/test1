@@ -1,0 +1,103 @@
+/**app.wxss**/
+
+/* 全局容器样式 */
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* 全局背景样式 */
+page {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  color: rgba(33, 33, 33, 0.9);
+  position: relative;
+}
+
+/* 移除了页面顶部和底部的模糊渐变效果 */
+
+/* 全局按钮样式 */
+.btn {
+  background: rgba(25, 118, 210, 0.2);
+  color: rgba(33, 33, 33, 0.9);
+  border: 1px solid rgba(25, 118, 210, 0.4);
+  border-radius: 40rpx;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.btn:active {
+  transform: scale(0.95);
+  background: rgba(25, 118, 210, 0.3);
+}
+
+/* 全局卡片样式 */
+.card {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16rpx;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 全局文本样式 */
+.text-primary {
+  color: rgba(33, 33, 33, 0.9);
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.text-secondary {
+  color: rgba(33, 33, 33, 0.7);
+}
+
+.text-hint {
+  color: rgba(33, 33, 33, 0.5);
+}
+
+/* 全局渐变文本 */
+.text-gradient {
+  background: linear-gradient(90deg, #00f0ff, #0066ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 全局动画类 */
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:active {
+  transform: scale(0.95);
+}
+
+/* 全局加载动画 */
+.loading {
+  display: inline-block;
+  width: 36rpx;
+  height: 36rpx;
+  border: 3rpx solid rgba(33, 33, 33, 0.3);
+  border-radius: 50%;
+  border-top-color: #1976d2;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 全局滚动条样式 */
+::-webkit-scrollbar {
+  width: 6rpx;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(33, 33, 33, 0.2);
+  border-radius: 3rpx;
+}

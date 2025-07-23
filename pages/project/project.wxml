@@ -1,0 +1,101 @@
+<view class="project-container">
+  <!-- 搜索框 -->
+  <view class="search-box" wx:if="{{isLogin}}">
+    <input 
+      class="search-input" 
+      placeholder="请输入项目关键词搜索"
+      value="{{searchKeyword}}"
+      bindinput="onSearchInput"
+    />
+    <button class="search-btn" bindtap="handleSearch">搜索</button>
+  </view>
+
+  <!-- 未登录状态 -->
+  <view class="login-container" wx:if="{{!isLogin}}">
+    <image class="login-image" src="/images/project.png" mode="aspectFit"/>
+    <text class="login-tip">登录后查看项目进度</text>
+    <button class="login-btn" bindtap="handleLogin">立即登录</button>
+  </view>
+
+  <!-- 已登录状态 -->
+  <view class="project-content" wx:else>
+    <!-- 加载中 -->
+    <view class="loading" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+
+    <!-- 项目列表 -->
+    <view class="project-list" wx:elif="{{projectList.length > 0}}">
+      <view 
+        class="project-item" 
+        wx:for="{{projectList}}" 
+        wx:key="id"
+        bindtap="viewProjectDetail"
+        data-id="{{item.id}}"
+      >
+        <view class="project-header">
+          <text class="project-name">{{item.name}}</text>
+          <text class="project-status status-{{item.status}}">{{item.statusText}}</text>
+        </view>
+        
+        <view class="project-info">
+          <view class="info-row">
+            <view class="info-item">
+              <text class="label">开始时间：</text>
+              <text class="value">{{item.startTime}}</text>
+            </view>
+            <view class="info-item">
+              <text class="label">预计完成：</text>
+              <text class="value">{{item.expectedEndTime}}</text>
+            </view>
+          </view>
+          <view class="info-row" wx:if="{{item.totalTasks > 0}}">
+            <view class="info-item">
+              <text class="label">总任务数：</text>
+              <text class="value">{{item.totalTasks}}</text>
+            </view>
+            <view class="info-item">
+              <text class="label">已完成：</text>
+              <text class="value">{{item.completedTasks}}</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="progress-section">
+          <view class="progress-bar status-{{item.status}}">
+            <view 
+              class="progress-inner"
+              style="width: {{item.progress}}%"
+            ></view>
+          </view>
+          <view class="progress-info">
+            <text class="progress-text">项目进度：{{item.progress}}%</text>
+            <text class="update-time">更新时间：{{item.updateTime}}</text>
+          </view>
+        </view>
+        
+        <view class="project-footer">
+          <view class="status-flow">
+            <view 
+              class="flow-item {{index <= item.currentStepIndex ? 'completed' : ''}} {{index === item.currentStepIndex ? 'current' : ''}}"
+              wx:for="{{['测评中', '报告编制中', '报告审核中', '交付中', '已完成']}}" 
+              wx:for-item="step"
+              wx:for-index="index"
+              wx:key="*this"
+            >
+              <view class="flow-dot"></view>
+              <view class="flow-line" wx:if="{{index < 4}}"></view>
+              <text class="flow-text">{{step}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty" wx:else>
+      <image class="empty-image" src="/images/project.png" mode="aspectFit"/>
+      <text>暂无项目信息</text>
+    </view>
+  </view>
+</view>

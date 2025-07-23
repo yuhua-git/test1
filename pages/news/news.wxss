@@ -1,0 +1,84 @@
+/* 容器样式 */
+.news-container {
+  padding: 20rpx;
+  background: transparent;
+  min-height: 100vh;
+}
+
+/* 资讯列表样式 */
+.news-list {
+  margin-bottom: 20rpx;
+}
+
+.news-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.news-item:active {
+  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.news-image {
+  width: 100%;
+  height: 360rpx;
+  filter: brightness(0.9);
+}
+
+.news-content {
+  padding: 20rpx;
+}
+
+.news-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: rgba(33, 33, 33, 0.9);
+  line-height: 1.4;
+  margin-bottom: 12rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.news-desc {
+  font-size: 28rpx;
+  color: rgba(33, 33, 33, 0.7);
+  line-height: 1.4;
+  margin-bottom: 16rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.news-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  color: rgba(33, 33, 33, 0.6);
+}
+
+/* 加载状态样式 */
+.loading,
+.no-more,
+.empty {
+  text-align: center;
+  padding: 30rpx;
+  color: rgba(33, 33, 33, 0.6);
+  font-size: 28rpx;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.empty {
+  padding: 100rpx 30rpx;
+}

@@ -1,0 +1,149 @@
+<view class="container">
+  <!-- Banner区域 -->
+  <view class="banner">
+    <swiper class="banner-swiper" indicator-dots="true" autoplay="true" interval="3000" duration="500">
+      <swiper-item wx:for="{{bannerList}}" wx:key="*this">
+        <view class="banner-color-block" style="background-color: {{item}}"></view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 安全态势感知 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">漏洞扫描</text>
+    </view>
+    <view class="security-overview">
+      <view class="security-score">
+        <text class="score-value">{{securityScore}}</text>
+        <text class="score-label">安全评分</text>
+      </view>
+      <view class="security-stats">
+        <view class="stat-item">
+          <text class="stat-value warning">{{warningCount}}</text>
+          <text class="stat-label">风险预警</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value safe">{{safeCount}}</text>
+          <text class="stat-label">安全资产</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 安全服务入口 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">安全服务入口</text>
+    </view>
+    <view class="service-grid">
+      <view class="service-item" wx:for="{{4}}" wx:key="*this">
+        <view class="service-color-block" style="background-color: {{index === 0 ? '#4a90e2' : index === 1 ? '#50c878' : index === 2 ? '#ff6b6b' : '#ffa500'}}"></view>
+        <text class="service-name">服务{{index + 1}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 安全知识 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">安全知识</text>
+      <view class="more-link" bindtap="viewMoreNews">
+        <text>查看更多</text>
+        <text class="arrow-text">→</text>
+      </view>
+    </view>
+    <view class="news-list">
+      <view class="news-item" wx:for="{{newsList}}" wx:key="id" bindtap="viewNewsDetail" data-id="{{item.id}}">
+        <view class="news-color-block" style="background-color: {{item.bgColor}}"></view>
+        <view class="news-info">
+          <text class="news-title">{{item.title}}</text>
+          <text class="news-time">{{item.time}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 项目监控 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">项目监控</text>
+      <view class="more-link" bindtap="viewMoreProjects">
+        <text>查看更多</text>
+        <text class="arrow-text">→</text>
+      </view>
+    </view>
+    <view class="project-list">
+      <view class="project-item" wx:for="{{projectList}}" wx:key="id" bindtap="viewProjectDetail" data-id="{{item.id}}">
+        <view class="project-info">
+          <text class="project-name">{{item.name}}</text>
+          <text class="project-status {{item.status}}">{{item.status === 'ongoing' ? '进行中' : item.status === 'completed' ? '已完成' : '延期'}}</text>
+        </view>
+        <view class="progress-bar">
+          <view class="progress-inner" style="width: {{item.progress}}"></view>
+        </view>
+        <text class="progress-text">进度：{{item.progress}}%</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- AI智能问答 -->
+  <view class="section chat-section">
+    <view class="section-header">
+      <text class="section-title">AI智能问答</text>
+    </view>
+    <view class="chat-container">
+      <scroll-view class="chat-history" scroll-y scroll-into-view="{{lastMessageId}}">
+        <view class="chat-message {{item.type}}" wx:for="{{chatHistory}}" wx:key="index" id="msg-{{index}}">
+          <image class="avatar" src="/images/{{item.type === 'user' ? 'user' : 'ai'}}-avatar.png" />
+          <view class="message-content">
+            <rich-text nodes="{{item.content}}"></rich-text>
+            <view class="message-actions">
+              <view class="action-btn copy-btn" catchtap="copyMessage" data-content="{{item.content}}" data-index="{{index}}">
+                <text class="action-icon">📋</text>
+                <text class="action-text">复制</text>
+              </view>
+              <view class="action-btn quote-btn" catchtap="quoteMessage" data-content="{{item.content}}" data-type="{{item.type}}">
+                <text class="action-icon">💬</text>
+                <text class="action-text">引用</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- 加载状态指示器 -->
+        <view class="chat-message ai loading" wx:if="{{isLoading}}">
+          <image class="avatar" src="/images/ai-avatar.png" />
+          <view class="message-content">
+            <view class="loading-dots">
+              <view class="dot"></view>
+              <view class="dot"></view>
+              <view class="dot"></view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="suggested-questions" wx:if="{{!chatHistory.length}}">
+        <view class="question-title">建议问题：</view>
+        <view class="question-list">
+          <view class="question-item" 
+                wx:for="{{suggestedQuestions}}" 
+                wx:key="*this"
+                bindtap="selectQuestion"
+                data-question="{{item}}">
+            {{item}}
+          </view>
+        </view>
+      </view>
+      <view class="chat-input-container">
+        <input class="chat-input" 
+               type="text" 
+               placeholder="请输入您的问题"
+               value="{{chatInput}}"
+               bindinput="onChatInput"
+               focus="{{focusInput}}"
+               bindblur="onInputBlur" />
+        <button class="send-btn" bindtap="sendQuestion">发送</button>
+      </view>
+    </view>
+  </view>
+</view>
