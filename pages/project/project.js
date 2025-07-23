@@ -56,71 +56,114 @@ Page({
     
     this.setData({ loading: true })
     try {
-      // 模拟数据
+      const app = getApp()
+      const apiBaseUrl = app.globalData.apiBaseUrl
+      // 项目API使用8002端口
+      const projectApiUrl = apiBaseUrl.replace(':8001', ':8002')
+      
+      // 构建请求参数
+      const params = {
+        page: 1,
+        page_size: 20
+      }
+      
+      // 添加搜索关键词
+      if (this.data.searchKeyword) {
+        params.keyword = this.data.searchKeyword
+      }
+      
+      // 构建查询字符串
+      const queryString = Object.keys(params)
+        .map(key => `${key}=${encodeURIComponent(params[key])}`)
+        .join('&')
+      
+      // 调用API获取项目列表
+      const response = await new Promise((resolve, reject) => {
+        wx.request({
+          url: `${projectApiUrl}/api/projects/list?${queryString}`,
+          method: 'GET',
+          timeout: app.globalData.apiTimeout,
+          success: resolve,
+          fail: reject
+        })
+      })
+      
+      if (response.statusCode === 200) {
+        const { projects } = response.data
+        
+        // 处理项目数据，添加小程序需要的字段
+        const projectList = projects.map(project => {
+          return {
+            id: project.id,
+            name: project.name,
+            status: project.status,
+            statusText: project.statusText,
+            startTime: project.startTime,
+            expectedEndTime: project.expectedEndTime,
+            actualEndTime: project.actualEndTime,
+            progress: project.progress,
+            stepProgress: project.stepProgress,
+            totalTasks: project.totalTasks,
+            completedTasks: project.completedTasks,
+            updateTime: project.updateTime,
+            currentStepIndex: project.currentStepIndex,
+            clientName: project.clientName,
+            projectManager: project.projectManager,
+            description: project.description
+          }
+        })
+        
+        this.setData({ projectList })
+      } else {
+        throw new Error(`API请求失败: ${response.statusCode}`)
+      }
+    } catch (error) {
+      console.error('加载项目列表失败:', error)
+      
+      // 如果API调用失败，使用模拟数据作为后备
+      console.log('使用模拟数据作为后备')
       const mockProjects = [
         {
           id: 1,
           name: '安全测评项目A',
           status: 'evaluating',
+          statusText: '测评中',
           startTime: '2024-01-15',
           expectedEndTime: '2024-02-15',
-          stepProgress: 15
+          progress: 15,
+          stepProgress: 15,
+          totalTasks: 20,
+          completedTasks: 3,
+          updateTime: '2024-01-20 10:30',
+          currentStepIndex: 0
         },
         {
           id: 2,
           name: '安全测评项目B',
           status: 'report_drafting',
+          statusText: '报告编制中',
           startTime: '2024-01-10',
           expectedEndTime: '2024-02-10',
-          stepProgress: 20
-        },
-        {
-          id: 3,
-          name: '安全测评项目C',
-          status: 'report_reviewing',
-          startTime: '2024-01-05',
-          expectedEndTime: '2024-02-05',
-          stepProgress: 10
-        },
-        {
-          id: 4,
-          name: '安全测评项目D',
-          status: 'delivering',
-          startTime: '2024-01-01',
-          expectedEndTime: '2024-02-01',
-          stepProgress: 5
-        },
-        {
-          id: 5,
-          name: '安全测评项目E',
-          status: 'completed',
-          startTime: '2023-12-01',
-          expectedEndTime: '2024-01-01',
-          stepProgress: 25
+          progress: 45,
+          stepProgress: 20,
+          totalTasks: 25,
+          completedTasks: 18,
+          updateTime: '2024-01-20 14:15',
+          currentStepIndex: 1
         }
       ]
-
-      // 根据搜索关键词过滤
+      
+      // 根据搜索关键词过滤模拟数据
       const filteredProjects = this.data.searchKeyword
         ? mockProjects.filter(p => p.name.toLowerCase().includes(this.data.searchKeyword.toLowerCase()))
         : mockProjects
-
-      // 处理项目数据
-      const projectList = filteredProjects.map(project => {
-        const status = this.data.statusMap[project.status] || { text: '未知状态', index: -1 }
-        return {
-          ...project,
-          statusText: status.text,
-          currentStepIndex: status.index,
-          progress: this.calculateProgress(project, status.index)
-        }
-      })
-
-      this.setData({ projectList })
-    } catch (error) {
+      
+      this.setData({ projectList: filteredProjects })
+      
       wx.showToast({
-        title: '加载失败',
-        icon: 'none'
+        title: '网络异常，显示离线数据',
+        icon: 'none',
+        duration: 2000
       })
     } finally {
       this.setData({ loading: false })

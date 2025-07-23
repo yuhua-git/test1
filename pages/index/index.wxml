@@ -77,10 +77,10 @@
       <view class="project-item" wx:for="{{projectList}}" wx:key="id" bindtap="viewProjectDetail" data-id="{{item.id}}">
         <view class="project-info">
           <text class="project-name">{{item.name}}</text>
-          <text class="project-status {{item.status}}">{{item.status === 'ongoing' ? '进行中' : item.status === 'completed' ? '已完成' : '延期'}}</text>
+          <text class="project-status {{item.status}}">{{item.statusText}}</text>
         </view>
         <view class="progress-bar">
-          <view class="progress-inner" style="width: {{item.progress}}"></view>
+          <view class="progress-inner" style="width: {{item.progress}}%"></view>
         </view>
         <text class="progress-text">进度：{{item.progress}}%</text>
       </view>

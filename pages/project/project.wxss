@@ -169,6 +169,7 @@
 .info-item .label {
   color: rgba(33, 33, 33, 0.6);
   width: 160rpx;
+  flex-shrink: 0;
 }
 
 .info-item .value {
@@ -189,6 +190,22 @@
   background: linear-gradient(90deg, #00f0ff, #0066ff);
   border-radius: 8rpx;
   transition: width 0.3s ease;
+}
+
+.progress-info {
+  margin-top: 10rpx;
+}
+
+.progress-text {
+  font-size: 28rpx;
+  color: rgba(33, 33, 33, 0.8);
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.update-time {
+  font-size: 22rpx;
+  color: rgba(33, 33, 33, 0.5);
+  margin-left: 20rpx;
 }
 
 .project-footer {

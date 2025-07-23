@@ -4,7 +4,7 @@ from pydantic import BaseModel
 import requests
 import json
 
-app = FastAPI(title="Smart Q&A API")
+app = FastAPI(title="Security Chat API", description="安全智能问答系统API", version="1.0.0")
 
 # 配置CORS
 app.add_middleware(
@@ -60,6 +60,28 @@ def chat(request: ChatRequest):
     except KeyError:
         raise HTTPException(status_code=500, detail="LLM响应格式无效")
 
+
+
+@app.on_event("startup")
+async def startup_event():
+    """应用启动时的初始化操作"""
+    print("正在启动安全智能问答系统API...")
+
 @app.get("/")
 def root():
-    return {"message": "Smart Q&A API is running"}
+    return {
+        "message": "Security Chat API is running",
+        "version": "1.0.0",
+        "endpoints": {
+            "chat": "/chat"
+        }
+    }
+
+@app.get("/health")
+def health_check():
+    """健康检查接口"""
+    return {
+        "status": "healthy",
+        "service": "chat",
+        "timestamp": requests.get("http://worldtimeapi.org/api/timezone/Asia/Shanghai").json().get("datetime", "unknown")
+    }

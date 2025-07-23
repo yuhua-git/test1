@@ -39,25 +39,13 @@
         </view>
         
         <view class="project-info">
-          <view class="info-row">
-            <view class="info-item">
-              <text class="label">开始时间：</text>
-              <text class="value">{{item.startTime}}</text>
-            </view>
-            <view class="info-item">
-              <text class="label">预计完成：</text>
-              <text class="value">{{item.expectedEndTime}}</text>
-            </view>
+          <view class="info-item">
+            <text class="label">开始时间：</text>
+            <text class="value">{{item.startTime}}</text>
           </view>
-          <view class="info-row" wx:if="{{item.totalTasks > 0}}">
-            <view class="info-item">
-              <text class="label">总任务数：</text>
-              <text class="value">{{item.totalTasks}}</text>
-            </view>
-            <view class="info-item">
-              <text class="label">已完成：</text>
-              <text class="value">{{item.completedTasks}}</text>
-            </view>
+          <view class="info-item">
+            <text class="label">预计完成：</text>
+            <text class="value">{{item.expectedEndTime}}</text>
           </view>
         </view>
 
@@ -69,8 +57,7 @@
             ></view>
           </view>
           <view class="progress-info">
-            <text class="progress-text">项目进度：{{item.progress}}%</text>
-            <text class="update-time">更新时间：{{item.updateTime}}</text>
+            <text class="progress-text">项目进度：{{item.progress}}% <text class="update-time">更新时间：{{item.updateTime}}</text></text>
           </view>
         </view>
         
